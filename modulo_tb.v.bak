@@ -1,0 +1,34 @@
+'timescale 1ns/100ps
+module modulo_tb;
+
+wire clk;
+reg [15:0] in;
+wire [8:0] modulo;
+
+modulo mod_360 (clk,in,modulo);
+
+assign #5 clk = not clk;
+
+initial begin
+clk <= 0;
+in <=0;
+#5;
+in <=16'd50;
+
+#5;
+in <=16'd360;
+
+#5;
+in <=16'd361;
+
+#5;
+in <=16'd1000;
+
+#5;
+in <=16'hFFFF;
+
+end
+
+
+
+endmodule 

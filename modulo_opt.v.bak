@@ -1,0 +1,51 @@
+module modulo_opt (
+    input clk,
+    input [15:0] in, 
+    output reg [8:0] modulo
+);
+
+localparam [8:0] two_power_i_modulo_360 [0:15] = {
+    9'd1,    // two_power_0_modulo_360
+    9'd2,    // two_power_1_modulo_360
+    9'd4,    // two_power_2_modulo_360
+    9'd8,    // two_power_3_modulo_360
+    9'd16,   // two_power_4_modulo_360
+    9'd32,   // two_power_5_modulo_360
+    9'd64,   // two_power_6_modulo_360
+    9'd128,  // two_power_7_modulo_360
+    9'd256,  // two_power_8_modulo_360
+    9'd152,  // two_power_9_modulo_360
+    9'd304,  // two_power_10_modulo_360
+    9'd248,  // two_power_11_modulo_360
+    9'd136,   // two_power_12_modulo_360
+    9'd272,   // two_power_13_modulo_360
+    9'd184,   // two_power_14_modulo_360
+    9'd8   // two_power_15_modulo_360
+};
+
+
+reg [15:0] in_reg;
+wire [8:0] modulo_wire;
+reg [10:0] level1_out;
+integer i;
+
+always @(*) begin
+level1_out <= 0;
+for (i = 0; i<16 ; i = i +1) begin 
+level1_out <= level1_out + two_power_i_modulo_360[i];
+end
+end
+
+always @(posedge clk) begin
+    in_reg <= in;
+    modulo <= modulo_wire;
+end
+
+
+
+
+
+
+
+
+endmodule
